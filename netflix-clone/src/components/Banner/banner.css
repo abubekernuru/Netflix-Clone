@@ -1,0 +1,199 @@
+.banner {
+  color: white;
+  object-fit: contain;
+  height: 600px;
+  position: relative;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.5s ease;
+}
+
+.banner__contents {
+  margin-left: 50px;
+  padding-top: 180px;
+  height: 220px;
+  max-width: 600px;
+}
+
+.banner__title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  padding-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.banner__description {
+  width: 100%;
+  line-height: 1.5;
+  padding-top: 1.5rem;
+  font-size: 1.1rem;
+  max-width: 500px;
+  height: auto;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  margin-bottom: 2rem;
+}
+
+.banner__buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.banner__button {
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.banner__button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.banner__button:hover::before {
+  left: 100%;
+}
+
+.banner__button--primary {
+  background-color: #e50914;
+}
+
+.banner__button--primary:hover {
+  background-color: #f40612;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.banner__button--secondary {
+  background-color: rgba(109, 109, 110, 0.7);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.banner__button--secondary:hover {
+  background-color: rgba(109, 109, 110, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.banner__button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.banner__button-icon {
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+
+.banner--fadeBottom {
+  height: 10rem;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37, 37, 37, 0.7),
+    #111
+  );
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .banner {
+    height: 500px;
+  }
+  
+  .banner__contents {
+    margin-left: 20px;
+    padding-top: 120px;
+    max-width: 90%;
+  }
+  
+  .banner__title {
+    font-size: 2.2rem;
+  }
+  
+  .banner__description {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+  
+  .banner__button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .banner__buttons {
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner__buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  
+  .banner__button {
+    width: 200px;
+  }
+}
+
+/* Animation for banner content */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner__contents > * {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.banner__title {
+  animation-delay: 0.2s;
+}
+
+.banner__buttons {
+  animation-delay: 0.4s;
+}
+
+.banner__description {
+  animation-delay: 0.6s;
+}

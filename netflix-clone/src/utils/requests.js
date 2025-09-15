@@ -1,15 +1,12 @@
-// This file contains all the API endpoints we'll use
 
-// Replace this with your actual TMDB API key
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // https://api.themoviedb.org/3/trending/all/week?api_key=27140497fb0afc069980adf94987a15b&language=en-US
 
 // Base URL for movie images
-// export const imageBaseUrl = 'https://image.tmdb.org/t/p/original';
+export const imageBaseUrl = 'https://image.tmdb.org/t/p/original';
 
-// API requests for different movie categories
-const requests = {
+export const requests = {
   fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
   fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
   fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
@@ -21,8 +18,7 @@ const requests = {
 };
 
 // Function to search movies
-// export const searchMovies = (query) => {
-//   return `/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
-// };
+export const searchMovies = (query) => {
+  return `/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
+};
 
-export default requests
