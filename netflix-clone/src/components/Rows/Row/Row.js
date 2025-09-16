@@ -22,15 +22,6 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
     fetchData();
   }, [fetchUrl]);
 
-  // YouTube player options
-  const opts = {
-    height: "390",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-
   // Function to handle movie click and fetch trailer
   const handleClick = async (movie) => {
     if (trailerUrl) {
@@ -92,7 +83,7 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
           ></div>
           <div className="row__trailer">
             <iframe
-              src={`https://www.youtube.com/embed/${trailerUrl}`}
+              src={`https://www.youtube.com/embed/${trailerUrl}?autoplay=1`}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
