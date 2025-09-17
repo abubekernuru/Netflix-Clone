@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../../utils/axios';
 import './row.css';
-
+import movieTrailer from 'movie-trailer';
+import YouTube from 'react-youtube';
 
 function Row({ title, fetchUrl, isLargeRow = false }) {
   const [movies, setMovies] = useState([]);
@@ -21,34 +22,33 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = async (movie) => {
+  const handleClick = (movie) => {
     if (trailerUrl) {
-      setTrailerUrl(""); 
+      setTrailerUrl("");
     } else {
-      try {
-        let response;
-        
-        if (movie.media_type === 'tv' || movie.name) {
-          response = await axios.get(`/tv/${movie.id}/videos?api_key=${process.env.REACT_APP_API_KEY}`);
-        } else {
-          response = await axios.get(`/movie/${movie.id}/videos?api_key=${process.env.REACT_APP_API_KEY}`);
-        }
-        
-        const trailer = response.data.results.find(
-          (vid) => vid.type === "Trailer" && vid.site === "YouTube"
-        );
-        
-        if (trailer) {
-          setTrailerUrl(trailer.key);
-        } else {
-          console.log("No trailer found for this title");
-          alert("Sorry, no trailer available for this title.");
-        }
-      } catch (error) {
-        console.error('Error fetching trailer:', error);
-        alert("Error loading trailer. Please try again.");
-      }
+      movieTrailer(movie?.title || movie?.name || movie?.original_name || "")
+        .then((url) => {
+          if (url) {
+            const urlParams = new URLSearchParams(new URL(url).search);
+            setTrailerUrl(urlParams.get('v'));
+          } else {
+            console.log("No trailer found for this title");
+            alert("Sorry, no trailer available for this title.");
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching trailer:', error);
+          alert("Error loading trailer. Please try again.");
+        });
     }
+  };
+
+  const opts = {
+    height: '390',
+    width: '100%',
+    playerVars: {
+      autoplay: 1,
+    },
   };
 
   return (
@@ -76,14 +76,7 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
             onClick={() => setTrailerUrl("")}
           ></div>
           <div className="row__trailer">
-            <iframe
-              src={`https://www.youtube.com/embed/${trailerUrl}?autoplay=1`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title="YouTube trailer"
-              className="row__trailerIframe"
-            />
+            <YouTube videoId={trailerUrl} opts={opts} className="row__youtube" />
             <button 
               className="row__closeTrailer"
               onClick={() => setTrailerUrl("")}
