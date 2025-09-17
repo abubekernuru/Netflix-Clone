@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
-import { requests } from '../../utils/requests';
+import  requests  from '../../utils/requests';
 import './banner.css';
 
 function Banner() {
@@ -10,7 +10,6 @@ function Banner() {
     async function fetchData() {
       try {
         const request = await axios.get(requests.fetchNetflixOriginals);
-        // Select a random movie from Netflix Originals
         setMovie(
           request.data.results[
             Math.floor(Math.random() * request.data.results.length - 1)
@@ -23,7 +22,6 @@ function Banner() {
     fetchData();
   }, []);
 
-  // Function to truncate text if it's too long
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + '...' : str;
   }
