@@ -12,10 +12,14 @@
     z-index: 1;
     width: 100%;
     position: fixed;
-    background-color: rgb(20, 20, 20);
+    /* background-color: rgb(20, 20, 20); */
 }
 .nav_black{
-    background-color: rgb(20, 20, 20);
+    /* background-color: rgb(20, 20, 20); */
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .header_container{
     width: 100%;
