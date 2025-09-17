@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../../utils/axios';
 import './row.css';
-// import movieTrailer from "movie-trailer";
-// import YouTube from "react-youtube";
+
 
 function Row({ title, fetchUrl, isLargeRow = false }) {
   const [movies, setMovies] = useState([]);
@@ -22,24 +21,19 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
     fetchData();
   }, [fetchUrl]);
 
-  // Function to handle movie click and fetch trailer
   const handleClick = async (movie) => {
     if (trailerUrl) {
-      setTrailerUrl(""); // Close the trailer if already open
+      setTrailerUrl(""); 
     } else {
       try {
         let response;
         
-        // Check if it's a movie or TV show
         if (movie.media_type === 'tv' || movie.name) {
-          // It's a TV show
           response = await axios.get(`/tv/${movie.id}/videos?api_key=${process.env.REACT_APP_API_KEY}`);
         } else {
-          // It's a movie
           response = await axios.get(`/movie/${movie.id}/videos?api_key=${process.env.REACT_APP_API_KEY}`);
         }
         
-        // Find the first trailer
         const trailer = response.data.results.find(
           (vid) => vid.type === "Trailer" && vid.site === "YouTube"
         );
